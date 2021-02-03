@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
+<link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <title>Quotes</title>
+    <style>
+        h1{
+
+        }
+        .box{
+            background-color: teal;
+            padding: 2%;
+            width: 90%;
+            height: auto;
+        }
+        #innerBox
+        {
+            background-color: whitesmoke;
+            font-size: 15px;
+            width: 90%;
+            height: 50vh;
+        }
+        .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family:'Potta One', cursive;
+}
+.button3 {width: 90%;}
+#quote{
+        padding-top: 20%;
+        font-size: 29px;
+        font-family:'Potta One', cursive;
+    }
+    #author{
+        text-align: right;
+        padding-right: 1%;
+        font-family: 'Potta One', cursive;
+    }
+    h1{
+        background-color: black;
+        color: cornsilk;
+        padding:20px;
+        font-family: 'Potta One', cursive;
+    }
+    </style>
+    
+</head>
+<body>
+    <center>
+       
+        <h1>Quotes</h1>
+        
+        <div class="box">
+            <div id="innerBox">
+               <p id="quote"></p>
+               <p id="author"></p>
+              
+            </div>
+            <div id="newquote">
+                <button class="button button3" id="new">New Quotes</button>
+            </div>
+        </div>
+    </center>
+    <script>
+        const newQuoteBtn=document.getElementById("new");
+       
+
+        const getNewQuotes = (r)=>
+        {
+            let rn=Math.floor(Math.random()*100);
+            // let len=r.length;
+            console.log(r[rn].text);
+            const txt=document.getElementById("quote");
+            const author=document.getElementById("author");
+            txt.innerText=r[rn].text;
+            author.innerHTML="-"+r[rn].author;
+
+        }
+        const getQuotes =async () =>{
+            
+            const api="https://type.fit/api/quotes";
+            try{
+                let data= await fetch(api);
+                let realData =await data.json();
+                getNewQuotes(realData);
+                // console.log(realData[0].text);
+            }
+            catch(error)
+            {
+
+            }
+        };
+        getQuotes();
+        newQuoteBtn.addEventListener("click",()=>
+        {
+            location.reload();
+        });
+    </script>
+</body>
+</html>
